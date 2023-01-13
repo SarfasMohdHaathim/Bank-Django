@@ -50,3 +50,23 @@ def userlogin(request):
             print('invalid Credential')
 
     return render(request,'login.html')
+
+
+
+def profile(request):
+    if request.method == 'POST':
+        # fullname=request.POST['fullname']
+        date=request.POST['date']
+        age=request.POST['age']
+        phone=request.POST['phone']
+        email=request.POST['email']
+        gender=request.POST['gender']
+        acctype=request.POST['acctype']
+        district=request.POST['district']
+        dc=request.POST['dc']
+        cc=request.POST['cc']
+        ps=request.POST.get('ps',False)
+        print(dc,gender)
+
+
+    return render(request,'createprofile.html')

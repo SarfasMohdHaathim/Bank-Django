@@ -9,9 +9,3 @@ class CustomUserCreationForm(UserCreationForm):
         model=User
         fields=['username','password1','password2']
 
-
-class ProfileForm(ModelForm):
-    class Meta:
-        model=Profile
-        fields='__all__'
-
