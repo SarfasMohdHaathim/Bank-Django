@@ -12,13 +12,13 @@ TYPEACCOUNT = (
     ("SAVINGS" , "SAVINGS ACCOUNT"),
     ("CURRENT","CURRENT ACCOUNT")
 )
-DISTRICT = (
-    ("KOZHIKODE", "KOZHIKODE"),
+DISTRICT = [
+    ("ERANAKULAM",("KOCHI","KOCHI"))
+    ("KOZHIKODE", ("KOZHIKODE","KOZHIKODE"),("VADAKARA","VADAKARA")),
     ("ALAPUZHA", "ALAPUZHA"),
-    ("MALAPPURAM", "MALAPPURAM"),
+    ("MALAPPURAM", ("MALAPPURAM","MALAPPURAM"),("VENGARA","VENGARA")),
     ("TRISUR", "TRISUR")
-)
-
+]
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, blank=True, null=True)
@@ -28,7 +28,6 @@ class Profile(models.Model):
     email = models.EmailField(max_length=200, blank=True, null=True)
     address=models.CharField(max_length=200, blank=True, null=True)
     district =models.CharField(max_length=20,choices=DISTRICT)
-    # branch=models.CharField(max_length=20,choices=BRANCH)
     gender =models.CharField(max_length=20,choices=GENDER)
     account_type =models.CharField(max_length=20,choices=TYPEACCOUNT)
     debitcard=models.BooleanField(default=False)
@@ -36,7 +35,6 @@ class Profile(models.Model):
     passbook=models.BooleanField(default=False)
     
     
-
 
     def __str__(self):
         return str(self.user)
