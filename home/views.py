@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User 
 from .forms import CustomUserCreationForm
+from .models import *
 # Create your views here.
 def home(request):
     return render(request,'index.html')
@@ -55,18 +56,24 @@ def userlogin(request):
 
 def profile(request):
     if request.method == 'POST':
-        # fullname=request.POST['fullname']
+        fullname=request.POST['fullname']
         date=request.POST['date']
         age=request.POST['age']
         phone=request.POST['phone']
         email=request.POST['email']
+        address=request.POST['address']
         gender=request.POST['gender']
         acctype=request.POST['acctype']
         district=request.POST['district']
-        dc=request.POST['dc']
-        cc=request.POST['cc']
+        dc=request.POST.get('dc',False)
+        cc=request.POST.get('cc',False)
         ps=request.POST.get('ps',False)
         print(dc,gender)
+        Profile.objects.create(user=request.user
+        ,name=fullname
+        ,dob=date,
+        age=age,phone=phone,email=email,address=address,district=district,gender=gender
+        ,account_type=acctype,debitcard=dc,creditcard=cc,passbook=ps).save()
 
 
     return render(request,'createprofile.html')
