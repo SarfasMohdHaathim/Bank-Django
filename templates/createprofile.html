@@ -17,6 +17,25 @@
   <header>
     <!-- place navbar here -->
   </header>
+
+{% if messages %}
+{% for message in messages %}
+
+  <div class="alert alert-success" role="alert">
+    {{ message }}<a href="\" class="alert-link">Return To Home</a>
+  </div>
+  {% endfor %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
   <div class="container">
     <form  action="{% url 'profile' %}" method="post" class="w-50 mx-auto">
         {% csrf_token %}
@@ -84,16 +103,17 @@
           <label class="form-check-label" for="exampleCheck1">DEBIT CARD</label>
         </div>
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="cc">
-          <label class="form-check-label" for="exampleCheck1">CREDIT CARD</label>
+          <input type="checkbox" class="form-check-input" id="exampleCheck2" name="cc">
+          <label class="form-check-label" for="exampleCheck2">CREDIT CARD</label>
         </div>
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="ps">
-          <label class="form-check-label" for="exampleCheck1">PASSBOOK</label>
+          <input type="checkbox" class="form-check-input" id="exampleCheck3" name="ps">
+          <label class="form-check-label" for="exampleCheck3">PASSBOOK</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </div>
+
  
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

@@ -3,6 +3,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User 
 from .forms import CustomUserCreationForm
 from .models import *
+from django.contrib import messages
 # Create your views here.
 def home(request):
     return render(request,'index.html')
@@ -46,7 +47,11 @@ def userlogin(request):
 
         if user is not None:
             login(request,user)
-            return redirect('home')
+            try:
+                Profile.objects.get(user=user)
+                return redirect('home')
+            except:
+                return redirect('profile')
         else:
             print('invalid Credential')
 
@@ -68,12 +73,19 @@ def profile(request):
         dc=request.POST.get('dc',False)
         cc=request.POST.get('cc',False)
         ps=request.POST.get('ps',False)
+        if dc:
+            dc=True
+        if cc:
+            cc=True
+        if ps:
+            ps=True
         print(dc,gender)
         Profile.objects.create(user=request.user
         ,name=fullname
         ,dob=date,
         age=age,phone=phone,email=email,address=address,district=district,gender=gender
-        ,account_type=acctype,debitcard=dc,creditcard=cc,passbook=ps).save()
+        ,account_type=acctype,creditcard=cc,passbook=ps).save()
+        messages.success(request, 'Form submission successful')
 
 
     return render(request,'createprofile.html')
